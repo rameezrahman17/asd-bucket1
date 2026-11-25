@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs/promises");
+const path = require("path");
 
 const app = express();
 let productsCache;
@@ -10,7 +11,7 @@ async function getProducts() {
     return productsCache;
   }
 
-  const data = await fs.readFile("db.json", "utf-8");
+  const data = await fs.readFile(path.join(__dirname, "db.json"), "utf-8");
   productsCache = JSON.parse(data);
   return productsCache;
 }
