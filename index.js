@@ -16,6 +16,13 @@ async function getProducts() {
   return productsCache;
 }
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "API is running",
+    endpoints: ["/products", "/products/:id"],
+  });
+});
+
 app.get("/products", async (req, res) => {
   try {
     await responseDelay();
@@ -59,6 +66,8 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
